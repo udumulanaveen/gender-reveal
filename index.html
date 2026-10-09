@@ -288,7 +288,7 @@
         if(!response.ok || !result.ok)throw new Error(result.message || 'Unable to save your RSVP.');
         msg.className='rsvp-message visible success';msg.textContent=result.message;
         $('rsvp-form').reset();$('guest-count').value='1';updateGuestFields();rsvpRequestId='';
-      }catch(error){msg.textContent='We could not confirm your RSVP. Please try again; retrying the same details will not add a duplicate.'}
+      }catch(error){msg.textContent='We couldn’t confirm your RSVP. It may already have been saved. Please check with the hosts before submitting again.'}
       finally{clearTimeout(timeout);button.disabled=false;button.textContent='Submit RSVP'}
     });
     render();setInterval(updateCountdown,1000);
