@@ -133,7 +133,7 @@
       <div class="details-grid">
         <article class="detail-card"><div class="detail-icon"><svg><use href="#icon-calendar"/></svg></div><div class="detail-copy"><strong>DATE</strong><p id="display-date">Date to be announced</p></div></article>
         <article class="detail-card"><div class="detail-icon"><svg><use href="#icon-clock"/></svg></div><div class="detail-copy"><strong>TIME</strong><p id="display-time">6:00 PM</p><p class="small-text" id="display-reveal-time"></p></div></article>
-        <article class="detail-card"><div class="detail-icon"><svg><use href="#icon-location"/></svg></div><div class="detail-copy"><strong>VENUE</strong><p id="display-venue" hidden></p><p class="small-text" id="display-address"></p><a class="venue-directions" id="venue-directions" href="https://www.google.com/maps/search/?api=1&amp;query=5108%20W%20Yoga%20Wy%2C%20Peoria%2C%20IL%2061615" target="_blank" rel="noopener noreferrer">Get directions ↗</a></div></article>
+        <article class="detail-card"><div class="detail-icon"><svg><use href="#icon-location"/></svg></div><div class="detail-copy"><strong>VENUE</strong><p id="display-venue">Chinmaya Mission Peoria</p><p class="small-text" id="display-address"></p><a class="venue-directions" id="venue-directions" href="https://www.google.com/maps/search/?api=1&amp;query=5108%20W%20Yoga%20Wy%2C%20Peoria%2C%20IL%2061615" target="_blank" rel="noopener noreferrer">Get directions ↗</a></div></article>
         <article class="detail-card"><div class="detail-icon"><svg><use href="#icon-dress"/></svg></div><div class="detail-copy"><strong>DRESS CODE</strong><p id="display-dress">Cozy &amp; Festive<br>Fall Attire 🍁</p></div></article>
       </div>
     </div></section>
@@ -178,13 +178,13 @@
     'use strict';
     // Set permanent defaults here before sharing the website. Visitors cannot publish
     // their own changes by using the Customize preview button.
-    const DEFAULT_SETTINGS = {hosts:'Anil & Abhinaya',eventDate:'2026-10-24',startTime:'18:00',endTime:'',revealTime:'',venue:'',address:'5108 W Yoga Wy, Peoria, IL 61615',dress:'Cozy & Festive Fall Attire',hostEmail:''};
+    const DEFAULT_SETTINGS = {hosts:'Anil & Abhinaya',eventDate:'2026-10-24',startTime:'18:00',endTime:'',revealTime:'',venue:'Chinmaya Mission Peoria',address:'5108 W Yoga Wy, Peoria, IL 61615',dress:'Cozy & Festive Fall Attire',hostEmail:''};
     const SETTINGS_KEY = 'little-pumpkin-anil-abhinaya-settings-v2';
     const $ = id => document.getElementById(id);
     const readJSON = (key, fallback) => {try{return JSON.parse(localStorage.getItem(key))??fallback}catch{return fallback}};
     let settings = {...DEFAULT_SETTINGS,...readJSON(SETTINGS_KEY,{})};
     if(!settings.startTime) settings.startTime = DEFAULT_SETTINGS.startTime;
-    if(settings.venue === 'Oka') settings.venue = '';
+    if(!settings.venue || settings.venue === 'Oka') settings.venue = DEFAULT_SETTINGS.venue;
     const safeText = (id,text) => {$(id).textContent=text};
     const formatTime = val => {if(!val) return '';let [h,m]=val.split(':').map(Number);return `${h%12||12}:${String(m).padStart(2,'0')} ${h>=12?'PM':'AM'}`};
     const timeOfEvent = () => settings.eventDate ? new Date(`${settings.eventDate}T${settings.startTime||'00:00'}:00`) : null;
